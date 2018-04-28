@@ -1,0 +1,76 @@
+#!/bin/bash
+apt install vim vim-script vim-doc vim-plugin-manager
+cp ~/.vimrc ~/.vimrc.bak
+
+#install plugins
+
+#pathogen
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+
+#auto-pair
+git clone git://github.com/jiangmiao/auto-pairs.git ~/.vim/bundle/auto-pairs
+
+#nerdtree
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+## use shortkey
+
+#minibufexplorer
+mkdir -p ~/.vim/bundle/minibufexplorer/plugin && \
+wget "http://www.vim.org/scripts/download_script.php?src_id=3640" \
+-O ~/.vim/bundle/minibufexplorer/plugin/minibufexpl.vim
+
+#ctags taglist omnicppcomplete
+apt install ctags
+cd ~/.vim/bundle && wget "http://www.vim.org/scripts/download_script.php?src_id=19574" -O taglist.zip && unzip taglist.zip -d taglist
+cd -
+cd ~/.vim/bundle && wget "http://www.vim.org/scripts/download_script.php?src_id=7722" -O omnicppcomplet
+cd -
+
+#supertab
+cd ~/.vim/bundle && git clone https://github.com/ervandew/supertab.git
+cd -
+
+
+cat >~.vimrc <<EOF
+"pathogen
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+"nerdtree
+echo 'map <C-n> :NERDTree<CR>' >> .vimrc
+
+"minibufexplorer
+let g:miniBufExplMaxSize = 2
+
+"taglist
+let Tlist_Show_One_File=1    " 只展示一个文件的taglist
+let Tlist_Exit_OnlyWindow=1  " 当taglist是最后以个窗口时自动退出
+let Tlist_Use_Right_Window=1 " 在右边显示taglist窗口
+let Tlist_Sort_Type="name"   " tag按名字排序
+
+
+
+"auto load config
+autocmd BufWritePost $MYVIMRC source $MYVIMRClhle
+
+EOF
+
+
+
+###########
+#Vundle
+#youcompleteme
+# sudo apt install python python-pil python3-pil python-dev clang cmake
+# sudo pip3 install future setuptools Markdown frozendict
+# cd ~/.vim/bundle/YouCompleteMe
+# ./install.py --clang-completer --system-libclang
+# cp third_party/ycmd/examples/.ycm_extra_conf.py ~/
+
+
+
+
+
+
