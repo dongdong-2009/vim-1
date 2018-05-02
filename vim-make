@@ -1,10 +1,11 @@
 #!/bin/sh
-
+echo ----------------
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
 
+echo ----------------
 cd ~/prog
 git clone https://github.com/vim/vim.git
 cd vim/src
@@ -16,7 +17,9 @@ cd vim/src
             --enable-perlinterp=yes \
             --enable-luainterp=yes \
             --enable-gui=gtk2 --enable-cscope --prefix=/usr
+echo ----------------
 make VIMRUNTIMEDIR=/usr/share/vim/vim80 -j8
+echo ----------------
 sudo make install
 
 #sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
