@@ -45,8 +45,9 @@ git submodule update --init --recursive
 
 
 echo '-------------------------- install uncrustify ----------------------------'
-git clone https://github.com/uncrustify/uncrustify ~/uncrustify
-cd ~/uncrustify/
+rm /tmp/uncrustify -rf
+git clone https://github.com/uncrustify/uncrustify /tmp/uncrustify
+cd /tmp/uncrustify/
 cmake ..
 cmake --build .
 sudo make install
