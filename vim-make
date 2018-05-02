@@ -1,12 +1,12 @@
 #!/bin/sh
-echo ----------------
+echo '---------------- remove system vim & install depedents --------------------'
 sudo apt-get remove vim vim-common vim-tiny 
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
 
-echo ----------------
+echo '------------------------- clone vim source --------------------------------'
 cd ~/prog
 git clone https://github.com/vim/vim.git
 cd vim/src
@@ -18,9 +18,10 @@ cd vim/src
             --enable-perlinterp=yes \
             --enable-luainterp=yes \
             --enable-gui=gtk2 --enable-cscope --prefix=/usr
-echo ----------------
+echo ----'-------------------------- nake vim ----------------------------------'
 make VIMRUNTIMEDIR=/usr/share/vim/vim80 -j8
-echo ----------------
+echo '---------------------------- install vim ---------------------------------'
+sudo make uninstall
 sudo make install
 
 #sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
@@ -28,16 +29,17 @@ sudo make install
 #sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
 #sudo update-alternatives --set vi /usr/bin/vim
 
+echo '--------------------------- install Vundle -------------------------------'
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 #vim<<：PluginInstall
-
+echo '------------------------ install YouCompleteMe ---------------------------'
 cd ~/.vim/bundle/YouCompleteMe
 git submodule update --init --recursive
 ./install.py --clang-completer
 
 
-#install uncrustify
+echo '-------------------------- install uncrustify ----------------------------'
 git clone https://github.com/uncrustify/uncrustify ~/uncrustify
 cd ~/uncrustify/
 cmake ..
