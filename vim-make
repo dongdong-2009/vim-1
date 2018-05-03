@@ -8,7 +8,7 @@ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git \
-    cmake
+    cmake g++
 
 echo '------------------------- clone vim source --------------------------------'
 cd ~/prog
@@ -57,9 +57,11 @@ else
     echo 'only test in ubuntu 16.04'
     exit
 fi
-mkdir -p ~/ycm_temp/llvm_root_dir
-cd ~/ycm_temp/llvm_root_dir
+mkdir ~/ycm_temp
+cd ~/ycm_temp
 tar jxvf /tmp/clang.tar.xz
+mv `ls` llvm_root_dir
+cd ~/ycm_temp/llvm_root_dir
 
 cd ~
 mkdir ycm_build
