@@ -57,8 +57,8 @@ else
     echo 'only test in ubuntu 16.04'
     exit
 fi
-mkdir -p ~ycm_temp/llvm_root_dir
-cd ~ycm_temp/llvm_root_dir
+mkdir -p ~/ycm_temp/llvm_root_dir
+cd ~/ycm_temp/llvm_root_dir
 tar jxvf /tmp/clang.tar.xz
 
 cd ~
