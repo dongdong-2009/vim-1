@@ -136,3 +136,6 @@ map <C-z> :NERDTreeToggle<CR>
 " tagbar插件
 nmap <leader>tb :TagbarToggle<CR>
 
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+map<C-d> :YcmCompleter GoToDefinition<CR>
+map<C-r> :YcmCompleter GoToDeclaration<CR>
