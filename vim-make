@@ -75,6 +75,6 @@ cd regex_build
 cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/cregex
 sudo cmake --build . --target _regex --config Release
 
-#cd ~/.vim/bundle/YouCompleteMe
-#git submodule update --init --recursive
-#./install.py --clang-completer
+cp .vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/
+
+
