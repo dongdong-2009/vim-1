@@ -7,7 +7,8 @@ sudo apt-get remove vim vim-common vim-tiny
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git \
+    cmake
 
 echo '------------------------- clone vim source --------------------------------'
 cd ~/prog
@@ -34,15 +35,7 @@ sudo make install
 
 echo '--------------------------- install Vundle -------------------------------'
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 wget https://raw.githubusercontent.com/houxd/vim/master/.vimrc -O ~/.vimrc
-
-#vim<<：PluginInstall
-echo '------------------------ install YouCompleteMe ---------------------------'
-cd ~/.vim/bundle/YouCompleteMe
-git submodule update --init --recursive
-./install.py --clang-completer
-
 
 echo '-------------------------- install uncrustify ----------------------------'
 rm /tmp/uncrustify -rf
@@ -52,3 +45,11 @@ cmake ..
 cmake --build .
 sudo make install
 
+echo '-------------------------- vim install plugin ----------------------------'
+sudo vim -c ':PluginInstall'
+
+#vim<<：PluginInstall
+echo '------------------------ install YouCompleteMe ---------------------------'
+cd ~/.vim/bundle/YouCompleteMe
+git submodule update --init --recursive
+./install.py --clang-completer
