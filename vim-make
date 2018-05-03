@@ -49,7 +49,34 @@ echo '-------------------------- vim install plugin ----------------------------
 sudo vim -c ':PluginInstall'
 
 #vim<<：PluginInstall
-echo '------------------------ install YouCompleteMe ---------------------------'
-cd ~/.vim/bundle/YouCompleteMe
-git submodule update --init --recursive
-./install.py --clang-completer
+echo '------------------- install YouCompleteMe c++ surppot---------------------'
+#download libclang
+if uname -v|grep Ubuntu|grep 16.04; then
+    wget http://releases.llvm.org/6.0.0/clang+llvm-6.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -O /tmp/clang.tar.xz
+else
+    echo 'only test in ubuntu 16.04'
+    exit
+fi
+mkdir -p ~ycm_temp/llvm_root_dir
+cd ~ycm_temp/llvm_root_dir
+tar jxvf /tmp/clang.tar.xz
+
+cd ~
+mkdir ycm_build
+cd ycm_build
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+cmake --build . --target ycm_core --config Release
+
+cd ~
+mkdir regex_build
+cd regex_build
+cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/cregex
+cmake --build . --target _regex --config Release
+
+
+
+cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+
+#cd ~/.vim/bundle/YouCompleteMe
+#git submodule update --init --recursive
+#./install.py --clang-completer
